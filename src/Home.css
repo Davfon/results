@@ -1,8 +1,8 @@
-.App {
+.home {
   text-align: center;
 }
 
-.App-body {
+.home_body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,20 +10,20 @@
   justify-content: center;
 }
 
-.logo {
+.home_logo {
   height: 150px;
   margin-top: -100px;
   margin-bottom: 10px;
 }
 
-.searchbar {
+.home_searchbar {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
 }
 
-.input-field {
+.home_input-field {
   display: flex;
   align-items: center;
   height: 30px;
@@ -37,7 +37,7 @@
   transition: box-shadow 0.05s linear;
 }
 
-.input-field:hover {
+.home_input-field:hover {
   box-shadow: 0px 0px 10px #b3b3b3;
 }
 
@@ -45,13 +45,13 @@ input:focus{
   outline: none;
 }
 
-.search-icon {
+.home_search-icon {
   position: absolute;
   color: grey;
   margin-left: 20px;
 }
 
-.search-button button {
+.home_search-button button {
   margin: 30px;
   padding: 7px 15px;
   background-color: #f8f8f8;
@@ -60,7 +60,7 @@ input:focus{
   color: #686868;
 }
 
-.search-button button:hover {
+.home_search-button button:hover {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   background-image: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
   background-color: #f8f8f8;
