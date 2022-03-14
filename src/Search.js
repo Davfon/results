@@ -24,9 +24,9 @@ function Search() {
         <div className='tabs'>
           <div className='tab first-tab'>
             <div className='tab-icon'>
-              <SearchIcon className='tab-icon-svg'/>
+              <SearchIcon className='tab-icon-svg blue'/>
             </div>
-            <div className='tab-text blue-text'>All</div>
+            <div className='tab-text blue'>All</div>
           </div>
           <div className='tab'>
             <div className='tab-icon'>
@@ -63,7 +63,7 @@ function Search() {
       </div>
       <div className='App-body'>
         <div className='featured-snippet'>
-          <p>
+          <p className='featured-text'>
           Drivers must be <b>at least 18 years old</b> in Switzerland to operate motorbikes and cars. A change in the law will allow young people to obtain a ...
           </p>
           <div className='grey-link'> https://www.swissinfo.ch › eng › driving </div>
@@ -76,6 +76,51 @@ function Search() {
             <div className='footnote-text'> About featured snippets </div>
           </div>
         </div>
+        <div className='search-result'>
+          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <p className='text'>
+            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+          </p>
+        </div>
+        <div className='search-result'>
+          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <p className='text'>
+            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+          </p>
+        </div>
+        <div className='search-result'>
+          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <p className='text'>
+            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+          </p>
+        </div>
+        <div className='search-result'>
+          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <p className='text'>
+            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+          </p>
+        </div>
+        <div className='search-result'>
+          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <p className='text'>
+            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+          </p>
+        </div>
+        <div className='search-result'>
+          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <p className='text'>
+            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+          </p>
+        </div>
+      </div>
+      <div className='App-footer'>
+        <img className='logo-footer' src={Logo} alt='' />
       </div>
     </div>
   )
