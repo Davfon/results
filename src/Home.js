@@ -14,13 +14,17 @@ function Home() {
     inputField.addEventListener('keyup', function (event) {
       if (event.key === 'Enter') {
         event.preventDefault();
-        document.getElementById('searchButton').click();
+        localStorage.setItem('searchTerm', searchTerm);
+        if (document.getElementById('searchButton') != null) {
+          document.getElementById('searchButton').click();
+        }
       }
     });
   });
 
   const handleClick = (e) => {
     e.preventDefault();
+    localStorage.setItem('searchTerm', searchTerm);
     navigate('/search');
   }
 
