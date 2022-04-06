@@ -1,5 +1,6 @@
 import './Search.css';
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from './assets/logo.png';
 import SearchIcon from '@mui/icons-material/Search';
 import ImageIcon from '@mui/icons-material/ImageOutlined';
@@ -8,51 +9,91 @@ import ShoppingIcon from '@mui/icons-material/LocalOfferOutlined';
 import MapsIcon from '@mui/icons-material/FmdGoodOutlined';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import HelpIcon from '@mui/icons-material/Help';
-import { Button } from '@mui/material';
 import { saveAs } from 'file-saver';
-import StopWatch from 'statman-stopwatch';
+import { Button } from '@mui/material';
 import { useElapsedTime } from 'use-elapsed-time';
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 function Search() {
-  const elapsedTime = useElapsedTime({ isPlaying: true});
-  const stopwatch1 = new StopWatch(true);
+  const navigate = useNavigate();
+
+  const { elapsedTime } = useElapsedTime({ isPlaying: true});
   const featuredLink = 'https://www.swissinfo.ch/eng/driving/29180148';
   const firstLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
-  const [featuredAmount, setFeaturedAmount] = useState(0);
-  const [firstAmount, setFirstAmount] = useState(0);
+  const secondLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
+  const thirdLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
+  const fourthLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
+  const fifthLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
+  const sixthLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
+  const [clickList, setClickList] = useState([]);
+  const [timeRecords, setTimeRecords] = useState([0,0,0,0,0,0,0]);
+  let userLeft = false;
+  const [userLeftTime, setUserLeftTime] = useState(0);
+  const [onOtherTabAmount, setOnOtherTabAmount] = useState(0);
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDJcuwU3zC7RGNoALPWzbfefbdnJhhtCo4",
+    authDomain: "results-a9800.firebaseapp.com",
+    projectId: "results-a9800",
+    storageBucket: "results-a9800.appspot.com",
+    messagingSenderId: "704807750931",
+    appId: "1:704807750931:web:0e6bd86ad0956b38c45ee6"
+  };
+
+  initializeApp(firebaseConfig);
+
+  function getCurrentTime() {
+    var now = new Date();
+    var date = now.toISOString().split('T')[0];
+    var time = ('0' + now.getHours()).slice(-2) + '-' + ('0' + now.getMinutes()).slice(-2) + '-' + ('0' + now.getSeconds()).slice(-2);
+    return date + ' ' + time;
+  }
 
   function endSearch() {
-    const data = 'Search Term: ' + localStorage.getItem('searchTerm') + '\nTotal Search Time in s: ' + elapsedTime.elapsedTime + '\nTime passed until clicked featured snippet in s (0, if not clicked): ' + String(featuredAmount) + '\nTime passed until clicked first result in s (0, if not clicked): ' + String(firstAmount) +'\nTime spent on other pages in s: ' + (stopwatch1.read(0));
-    var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, "dynamic.txt");
+    const storage = getStorage();
+    const storageRef = ref(storage, 'folder1/'+ getCurrentTime() +' dynamic.txt');
+    const data = 
+      'Search Term: ' + localStorage.getItem('searchTerm') + 
+      '\nTotal Search Time in s: ' + elapsedTime + 
+      '\nClick List: ' + String(clickList) + 
+      '\nTime spent on other pages in s: ' + onOtherTabAmount;
+    var blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+    uploadBytes(storageRef, blob).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+    });
+    saveAs(blob, 'dynamic.txt');
+    navigate('/end');
   }
 
-  function clickFeatured(featuredLink) {
-    setFeaturedAmount(elapsedTime.elapsedTime);
-    window.open(featuredLink);
+  function handleClick(link, id) {
+    userLeft = true;
+    // setUserLeftTime(elapsedTime);
+    let currentTimeRecords = [ ...timeRecords ];
+    if (currentTimeRecords[id] === 0) {
+      currentTimeRecords[id] = elapsedTime;
+      setTimeRecords(currentTimeRecords);
+    }
+    setClickList(oldList => [...oldList, String(id) + ': ' + String(elapsedTime)]);
+    window.open(link);
   }
 
-  function clickFirst(firstLink) {
-    setFirstAmount(elapsedTime.elapsedTime);
-    window.open(firstLink);
+  // window.addEventListener('focus', handleFocus());
+
+  function handleFocus() {
+    if (userLeft) {
+      setOnOtherTabAmount(onOtherTabAmount + (elapsedTime - userLeftTime));
+      console.log(onOtherTabAmount);
+      userLeft = false;
+    }
   }
 
   useEffect(() => {
-    window.addEventListener('focus', onFocus);
-    window.addEventListener('blur', onBlur);
-  });
-
-  const onFocus = () => {
-    stopwatch1.split();
-  };
-
-  const onBlur = () => {
-    stopwatch1.unsplit();
-  };
-
+    window.focus();
+  }, []);
 
   return (
-    <div className='App'>
+    <div className='App' id='App' tabIndex='100'>
       <div className='App-header'>
         <img className='logo' src={Logo} alt='' />
         <div className='searchbar'>
@@ -106,8 +147,8 @@ function Search() {
           <p className='featured-text'>
           Drivers must be <b>at least 18 years old</b> in Switzerland to operate motorbikes and cars. A change in the law will allow young people to obtain a ...
           </p>
-          <div className='grey-link' onClick={() => clickFeatured(featuredLink)} > https://www.swissinfo.ch › eng › driving </div>
-          <div className='blue-link' onClick={() => clickFeatured(featuredLink)} > Driving - SWI swissinfo.ch </div>
+          <div className='grey-link' onClick={() => handleClick(featuredLink, 0)} > https://www.swissinfo.ch › eng › driving </div>
+          <div className='blue-link' onClick={() => handleClick(featuredLink, 0)} > Driving - SWI swissinfo.ch </div>
           <div className='footnote'>
             <div className='separation-line'/>
             <div className='help-icon'>
@@ -117,43 +158,43 @@ function Search() {
           </div>
         </div>
         <div className='search-result'>
-          <div className='grey-link' onClick={() => clickFirst(firstLink)} > https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link' onClick={() => clickFirst(firstLink)} > Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(firstLink, 1)} > https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link' onClick={() => handleClick(firstLink, 1)} > Swiss driving age to drop to 17 - Le News </div>
           <p className='text'>
             20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(secondLink, 2)} > https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link' onClick={() => handleClick(secondLink, 2)} > Swiss driving age to drop to 17 - Le News </div>
           <p className='text'>
             20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(thirdLink, 3)} > https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link' onClick={() => handleClick(thirdLink, 3)} > Swiss driving age to drop to 17 - Le News </div>
           <p className='text'>
             20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(fourthLink, 4)} > https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link' onClick={() => handleClick(fourthLink, 4)} > Swiss driving age to drop to 17 - Le News </div>
           <p className='text'>
             20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(fifthLink, 5)} > https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link' onClick={() => handleClick(fifthLink, 5)} > Swiss driving age to drop to 17 - Le News </div>
           <p className='text'>
             20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link'> https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link'> Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(sixthLink, 6)} > https://lenews.ch › News & features › Automotive </div>
+          <div className='blue-link' onClick={() => handleClick(sixthLink, 6)} > Swiss driving age to drop to 17 - Le News </div>
           <p className='text'>
             20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
           </p>

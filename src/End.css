@@ -1,0 +1,24 @@
+.end-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.check-circle {
+  margin-top: -40vh;
+  color: #23A8F2;
+  transform: scale(1.3);
+}
+
+.thanks {
+  margin-top: 1vh;
+  font-size: 28px;
+}
+
+.message {
+  margin-top: 1vh;
+  font-size: 14px;
+}
