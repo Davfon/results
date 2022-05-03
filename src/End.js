@@ -6,8 +6,7 @@ function End() {
   return (
     <div className='end-container'>
       <CheckCircleIcon className='check-circle'/>
-      <div className='thanks'>Thank you!</div>
-      <div className='message'>You can continue with the survey now</div>
+      <div className='message'>Thanks! You can continue with the survey now</div>
     </div>
   )
 }

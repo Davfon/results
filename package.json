@@ -26,6 +26,7 @@
     "timer-stopwatch": "^0.2.0",
     "tiny-timer": "^1.6.0",
     "use-elapsed-time": "^3.0.4",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

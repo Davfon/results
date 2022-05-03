@@ -2,7 +2,7 @@ import './Home.css';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import React, { useState, useEffect } from 'react';
-import Logo from './assets/logo.png';
+import Logo from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
@@ -25,7 +25,7 @@ function Home() {
   const handleClick = (e) => {
     e.preventDefault();
     localStorage.setItem('searchTerm', searchTerm);
-    navigate('/search');
+    navigate('/car-study/group-a/search');
   }
 
   return (

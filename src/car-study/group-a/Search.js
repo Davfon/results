@@ -1,7 +1,7 @@
 import './Search.css';
 import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from './assets/logo.png';
+import Logo from '../../assets/logo.png';
 import SearchIcon from '@mui/icons-material/Search';
 import ImageIcon from '@mui/icons-material/ImageOutlined';
 import VideoIcon from '@mui/icons-material/VideoLibraryOutlined';
@@ -52,9 +52,11 @@ function Search() {
 
   function endSearch() {
     const storage = getStorage();
-    const storageRef = ref(storage, 'folder1/'+ getCurrentTime() +' dynamic.txt');
+    const storageRef = ref(storage, 'group-a/ '+ getCurrentTime() + ' group-a.txt');
+    const id = localStorage.getItem('id');
     const data = 
-      'Search Term: ' + localStorage.getItem('searchTerm') + 
+      'ID: ' + id +
+      '\nSearch Term: ' + localStorage.getItem('searchTerm') + 
       '\nTotal Search Time in s: ' + elapsedTime + 
       '\nClick List: ' + String(clickList) + 
       '\nTime spent on other pages in s: ' + onOtherTabAmount;
