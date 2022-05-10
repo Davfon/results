@@ -19,7 +19,7 @@ function Search() {
   const navigate = useNavigate();
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true});
-  const featuredLink = "https://www.expatica.com/ch/living/transportation/exchanging-a-foreign-drivers-licence-in-switzerland-102892/#:~:text=You%20can%20drive%20in%20Switzerland%20using%20your%20foreign%20driver's%20license,for%20a%20Swiss%20driver's%20license.";
+  const featuredLink = "https://www.expatica.com/ch/living/transportation/driving-and-parking-in-switzerland-100029/#:~:text=You%20can%20drive%20in%20Switzerland,translation%20of%20your%20foreign%20one.";
   const firstLink = 'https://www.eda.admin.ch/countries/usa/en/home/services/driving-and-vehicles/driving-ch-foreign-licence.html';
   const secondLink = 'https://www.ch.ch/en/vehicles-and-traffic/driving-licence/international-driving-licence/';
   const thirdLink = 'https://www.autoeurope.com/international-driving-permits-in-switzerland/';
@@ -49,7 +49,7 @@ function Search() {
 
   function endSearch() {
     const storage = getStorage();
-    const storageRef = ref(storage, 'group-a/ '+ getCurrentTime() + ' group-a.txt');
+    const storageRef = ref(storage, 'group-c/ '+ getCurrentTime() + ' group-c.txt');
     const id = localStorage.getItem('id');
     const data = 
       'ID: ' + id +
@@ -127,10 +127,10 @@ function Search() {
       <div className='App-body'>
         <div className='featured-snippet'>
           <p className='featured-text'>
-            <b>You can drive in Switzerland using your foreign driver's license for up to 12 months as long as you are at least 18 years old.</b> Once this 12 month period is up, you will need to exchange your license for a Swiss driver's license.
+            <b>You can drive in Switzerland using your foreign driving license for up to 12 months.</b> However, if your driver's license is not in English, German, French, or Italian, you also need an International Driving License. This isn't actually a license but a translation of your foreign one.
           </p>
           <div className='grey-link' onClick={() => handleClick(featuredLink, 0)} > https://www.expatica.com › ... › Transport </div>
-          <div className='blue-link' onClick={() => handleClick(featuredLink, 0)} > Getting or exchanging a Swiss driver's license - Expatica </div>
+          <div className='blue-link' onClick={() => handleClick(featuredLink, 0)} > Tips for driving and parking in Switzerland | Expatica </div>
           <div className='footnote'>
             <div className='separation-line'/>
             <div className='help-icon'>

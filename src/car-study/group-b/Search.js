@@ -1,5 +1,5 @@
 import './Search.css';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.png';
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,7 +8,6 @@ import VideoIcon from '@mui/icons-material/VideoLibraryOutlined';
 import ShoppingIcon from '@mui/icons-material/LocalOfferOutlined';
 import MapsIcon from '@mui/icons-material/FmdGoodOutlined';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import HelpIcon from '@mui/icons-material/Help';
 import { saveAs } from 'file-saver';
 import { Button } from '@mui/material';
 import { useElapsedTime } from 'use-elapsed-time';
@@ -19,18 +18,14 @@ function Search() {
   const navigate = useNavigate();
 
   const { elapsedTime } = useElapsedTime({ isPlaying: true});
-  const featuredLink = 'https://www.swissinfo.ch/eng/driving/29180148';
-  const firstLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
-  const secondLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
-  const thirdLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
-  const fourthLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
-  const fifthLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
-  const sixthLink = 'https://lenews.ch/2018/12/20/swiss-driving-age-to-drop-to-17';
+  const firstLink = 'https://www.eda.admin.ch/countries/usa/en/home/services/driving-and-vehicles/driving-ch-foreign-licence.html';
+  const secondLink = 'https://www.ch.ch/en/vehicles-and-traffic/driving-licence/international-driving-licence/';
+  const thirdLink = 'https://www.autoeurope.com/international-driving-permits-in-switzerland/';
+  const fourthLink = 'https://www.iamexpat.ch/expat-info/driving-switzerland/driving-licence';
+  const fifthLink = 'https://www.englishforum.ch/transportation-driving/209962-us-driver-s-license-conversion-swiss.html';
+  const sixthLink = 'https://www.frommers.com/destinations/switzerland/planning-a-trip/getting-around';
   const [clickList, setClickList] = useState([]);
   const [timeRecords, setTimeRecords] = useState([0,0,0,0,0,0,0]);
-  let userLeft = false;
-  const [userLeftTime, setUserLeftTime] = useState(0);
-  const [onOtherTabAmount, setOnOtherTabAmount] = useState(0);
 
   const firebaseConfig = {
     apiKey: "AIzaSyDJcuwU3zC7RGNoALPWzbfefbdnJhhtCo4",
@@ -58,8 +53,7 @@ function Search() {
       'ID: ' + id +
       '\nSearch Term: ' + localStorage.getItem('searchTerm') + 
       '\nTotal Search Time in s: ' + elapsedTime + 
-      '\nClick List: ' + String(clickList) + 
-      '\nTime spent on other pages in s: ' + onOtherTabAmount;
+      '\nClick List: ' + String(clickList);
     var blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
     uploadBytes(storageRef, blob).then((snapshot) => {
       console.log('Uploaded a blob or file!');
@@ -69,8 +63,6 @@ function Search() {
   }
 
   function handleClick(link, id) {
-    userLeft = true;
-    // setUserLeftTime(elapsedTime);
     let currentTimeRecords = [ ...timeRecords ];
     if (currentTimeRecords[id] === 0) {
       currentTimeRecords[id] = elapsedTime;
@@ -79,20 +71,6 @@ function Search() {
     setClickList(oldList => [...oldList, String(id) + ': ' + String(elapsedTime)]);
     window.open(link);
   }
-
-  // window.addEventListener('focus', handleFocus());
-
-  function handleFocus() {
-    if (userLeft) {
-      setOnOtherTabAmount(onOtherTabAmount + (elapsedTime - userLeftTime));
-      console.log(onOtherTabAmount);
-      userLeft = false;
-    }
-  }
-
-  useEffect(() => {
-    window.focus();
-  }, []);
 
   return (
     <div className='App' id='App' tabIndex='100'>
@@ -145,46 +123,47 @@ function Search() {
         <div className='header-line' />
       </div>
       <div className='App-body'>
-        <div className='search-result'>
-          <div className='grey-link' onClick={() => handleClick(firstLink, 1)} > https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link' onClick={() => handleClick(firstLink, 1)} > Swiss driving age to drop to 17 - Le News </div>
+      <div className='search-result'>
+          <div className='grey-link' onClick={() => handleClick(firstLink, 1)} > https://www.eda.admin.ch › services </div>
+          <div className='blue-link' onClick={() => handleClick(firstLink, 1)} > Driving in Switzerland on a foreign licence </div>
           <p className='text'>
-            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+            27.11.2017 — A foreign, national or international licence entitles the holder to drive all categories of vehicles for which that licence is valid on Swiss ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link' onClick={() => handleClick(secondLink, 2)} > https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link' onClick={() => handleClick(secondLink, 2)} > Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(secondLink, 2)} > https://www.ch.ch › international-d... </div>
+          <div className='blue-link' onClick={() => handleClick(secondLink, 2)} > International driving licence from Switzerland - ch.ch </div>
           <p className='text'>
-            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+            Validity and price. The international driving licence is valid for three years, but not beyond the expiry date of your Swiss driving licence. You cannot renew ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link' onClick={() => handleClick(thirdLink, 3)} > https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link' onClick={() => handleClick(thirdLink, 3)} > Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(thirdLink, 3)} > https://www.autoeurope.com › Travel Tips › IDP FAQ </div>
+          <div className='blue-link' onClick={() => handleClick(thirdLink, 3)} > Do I Need an International Driving Permit in Switzerland? </div>
           <p className='text'>
-            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+            Applying for an international drivers permit for your trip to Switzerland is simple. Anyone who is 18 years of age with a valid driver's license is eligible ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link' onClick={() => handleClick(fourthLink, 4)} > https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link' onClick={() => handleClick(fourthLink, 4)} > Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(fourthLink, 4)} > https://www.iamexpat.ch › expat-info › driving-licence </div>
+          <div className='blue-link' onClick={() => handleClick(fourthLink, 4)} > Driving licence in Switzerland </div>
           <p className='text'>
-            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+            The process of exchanging a licence depends on the validity of your old licence and where it was issued. Foreign driver's licences in Switzerland. For all ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link' onClick={() => handleClick(fifthLink, 5)} > https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link' onClick={() => handleClick(fifthLink, 5)} > Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(fifthLink, 5)} > https://www.englishforum.ch › 209... </div>
+          <div className='blue-link' onClick={() => handleClick(fifthLink, 5)} > US Driver's License conversion to Swiss - English Forum ... </div>
           <p className='text'>
-            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+            31.05.2014 · 19 Posts<br></br>
+            Fill in the form for the swiss license, send passport photos and your old license, and the eye test paper, and then about 2 weeks later, you get ...
           </p>
         </div>
         <div className='search-result'>
-          <div className='grey-link' onClick={() => handleClick(sixthLink, 6)} > https://lenews.ch › News & features › Automotive </div>
-          <div className='blue-link' onClick={() => handleClick(sixthLink, 6)} > Swiss driving age to drop to 17 - Le News </div>
+          <div className='grey-link' onClick={() => handleClick(sixthLink, 6)} > https://www.frommers.com › gettin... </div>
+          <div className='blue-link' onClick={() => handleClick(sixthLink, 6)} > Getting Around in Switzerland | Frommer's </div>
           <p className='text'>
-            20 Dec 2018 — This licence allows you to <b>drive</b> accompanied by a driver 23 or over who has had a full <b>driving</b> license for at least 3 years. The final step, ...
+          Driver's License—Any adult who's at least 18 years old and holding a valid national driver's license can drive in Switzerland, as long as the permitted ...
           </p>
         </div>
       </div>
