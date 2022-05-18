@@ -58,7 +58,7 @@ function Search() {
     uploadBytes(storageRef, blob).then((snapshot) => {
       console.log('Uploaded a blob or file!');
     });
-    saveAs(blob, 'dynamic.txt');
+    // saveAs(blob, 'dynamic.txt');
     navigate('/end');
   }
 
