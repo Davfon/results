@@ -1,0 +1,4 @@
+# Redirects from what the browser requests to what we serve
+/car-study/group-a  https://davfon-results.netlify.app/car-study/group-a
+/car-study/group-b  https://davfon-results.netlify.app/car-study/group-b
+/car-study/group-c  https://davfon-results.netlify.app/car-study/group-c
