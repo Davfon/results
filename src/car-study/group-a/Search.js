@@ -28,6 +28,7 @@ function Search() {
   const sixthLink = 'https://www.frommers.com/destinations/switzerland/planning-a-trip/getting-around';
   const [clickList, setClickList] = useState([]);
   const [timeRecords, setTimeRecords] = useState([0,0,0,0,0,0,0]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const firebaseConfig = {
     apiKey: "AIzaSyDJcuwU3zC7RGNoALPWzbfefbdnJhhtCo4",
@@ -76,13 +77,33 @@ function Search() {
 
   return (
     <div className='App' id='App' tabIndex='100'>
+
+      {isModalOpen ? <div className='modal'>
+        <div className='overlay'/>
+        <div className='modal-window'>
+          <h3>Are you done searching?</h3>
+          <div className='button-container'>
+            <div className='modal-done-button'>
+              <Button id='modalDoneButton' type='submit' variant='outlined' onClick={endSearch}>
+                Yes
+              </Button>
+            </div>
+            <div className='modal-cancel-button'>
+              <Button id='modalCancelButton' type='submit' variant='outlined' onClick={() => setIsModalOpen(false)}>
+                No
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div> : <div/> }
+      
       <div className='App-header'>
         <img className='logo' src={Logo} alt='' />
         <div className='searchbar'>
           <input className='fake-input-field' id='inputField' value={localStorage.getItem('searchTerm')} readOnly />
         </div>
         <div className='done-container'>
-          <Button onClick={() => endSearch()}>Done</Button>
+          <Button onClick={() => setIsModalOpen(!isModalOpen)}>Done</Button>
         </div>
         <div className='tabs'>
           <div className='tab first-tab'>

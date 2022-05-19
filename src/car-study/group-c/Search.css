@@ -71,12 +71,9 @@ input:focus{
   color: white;
 }
 
-.done-container button:hover {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  background-image: -webkit-linear-gradient(top, #23A8F2, #16a2ee);
+.done-container button:hover{
   background-color: #23A8F2;
-  border: 1px solid #23A8F2;
-  color: white;
+  cursor: pointer;
 }
 
 .tabs {
@@ -187,12 +184,13 @@ input:focus{
   height: 14px;
   margin-top: -10px;
   margin-left: 4px;
+  z-index: -1;
 }
 
 .help-icon-svg {
   transform: scale(0.7);
   margin-left: 0px;
-  color: grey
+  color: grey;
 }
 
 .separation-line {
@@ -238,4 +236,74 @@ input:focus{
   margin-top: 2vh;
   margin-left: 9vw;
   margin-right: 40px;
+}
+
+.modal {
+  z-index: 1;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.overlay {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color:rgba(0, 0, 0, 0.3);
+}
+
+.modal-window {
+  position: fixed;
+  top: 20vh;
+  width: 35vw;
+  height: 24vh;
+  background-color: #F2F2F2;
+  border-radius: 1vw;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.modal-cancel-button button {
+  display: flex;
+  margin: 10px;
+  padding: 7px 15px;
+  background-color: #f8f8f8;
+  border: 1px solid white;
+  text-transform: inherit;
+  color: #686868;
+}
+
+.modal-cancel-button button:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  background-image: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
+  background-color: #f8f8f8;
+  border: 1px solid #c6c6c6;
+  color: #3d3d3d;
+}
+
+.modal-done-button button{
+  margin: 10px;
+  padding: 7px 15px;
+  background-color: #23A8F2;
+  border: 1px solid white;
+  text-transform: inherit;
+  color: white;
+}
+
+.modal-done-button button:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  background-image: -webkit-linear-gradient(top, #23A8F2, #16a2ee);
+  background-color: #23A8F2;
+  border: 1px solid #c6c6c6;
+  color: white;
 }
