@@ -27,6 +27,7 @@ function Search() {
   const [clickList, setClickList] = useState([]);
   const [timeRecords, setTimeRecords] = useState([0,0,0,0,0,0,0]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false);
 
   const firebaseConfig = {
     apiKey: "AIzaSyDJcuwU3zC7RGNoALPWzbfefbdnJhhtCo4",
@@ -39,6 +40,20 @@ function Search() {
 
   initializeApp(firebaseConfig);
 
+  const exitPageNotification = function(e) {
+    const str = window.location.href.split("").reverse().join("");
+    const subpage = str.substring(0, str.indexOf('/')).split("").reverse().join("");
+    if (formSubmitting || subpage !== 'search') {
+      return undefined;
+    }
+    
+    (e || window.event).returnValue = 'Please press the "Done" button, before exiting the page.';
+    return 'Please press the "Done" button, before exiting the page.';
+  };
+
+  window.addEventListener("beforeunload", exitPageNotification);
+
+
   function getCurrentTime() {
     var now = new Date();
     var date = now.toISOString().split('T')[0];
@@ -47,6 +62,8 @@ function Search() {
   }
 
   function endSearch() {
+    setFormSubmitting(true);
+    window.removeEventListener("beforeunload", exitPageNotification);
     const storage = getStorage();
     const storageRef = ref(storage, 'group-b/' + getCurrentTime() + ' group-b.txt');
     const id = localStorage.getItem('id');
