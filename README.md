@@ -1,4 +1,91 @@
-# Getting Started with Create React App
+# Davfon-results
+Results is a react-based web application to conduct experiments on web search behavior.
+
+[Track Behavioral Data](#track-behavioral-data)<br />
+[Creating search results](#creating-search-results)<br />
+[Creating featured snippets](#creating-featured-snippets)<br />
+[Navigation](#navigation)<br />
+[Firebase](#firebase)
+
+## Track Behavioral Data
+The Results Web Application can track:
+- search term
+- total search time
+- clicks on search results with timestamp
+
+Results saves the tracked data into text files, which are stored in [Firebase](#firebase).
+
+## Creating search results
+
+<img src="./images/search-result.png">
+
+To create a search result you can use the template below. Simply add it inside the App-body div in Search.js:
+
+```html
+<div className='search-result'>
+    <div className='grey-link' onClick={() => handleClick(firstLink, 1)} >   
+        https://www.eda.admin.ch › services
+    </div>
+    <div className='blue-link' onClick={() => handleClick(firstLink, 1)} >
+        Driving in Switzerland on a foreign licence
+    </div>
+    <p className='text'>
+        27.11.2017 — A foreign, national or international licence entitles the
+        holder to drive all categories of vehicles for which that licence is
+        valid on Swiss ...
+    </p>
+</div>
+```
+
+Make sure to change the link and result rank in the handleClick function. (0 = featured snippet, 1 = first result, ...)
+
+## Creating featured snippets
+
+<img src="./images/featured-snippet.png">
+
+To create a featured snippet you can use the template below. Simply add it inside the App-body div in Search.js:
+
+```html
+<div className='featured-snippet'>
+    <p className='featured-text'>
+        <b>You can drive in Switzerland using your foreign driver's license for up to 12 months as long as you are at least 18 years old.</b> Once this 12 month period is up, you will need to exchange your license for a Swiss driver's license.
+    </p>
+    <div className='grey-link' onClick={() => handleClick(featuredLink, 0)} >
+        https://www.expatica.com › ... › Transport
+    </div>
+    <div className='blue-link' onClick={() => handleClick(featuredLink, 0)} >
+        Getting or exchanging a Swiss driver's license - Expatica
+    </div>
+    <div className='footnote'>
+        <div className='separation-line'/>
+        <div className='help-icon'>
+            <HelpIcon className='help-icon-svg'/>
+        </div>
+        <div className='footnote-text'>
+            About featured snippets
+        </div>
+    </div>
+</div>
+```
+
+Make sure to change the link and result rank in the handleClick function. (0 = featured snippet, 1 = first result, ...)
+
+## Navigation
+<img src="./images/navigation.png">
+
+Navigation can be customized in App.js and through the navigate() function in each File. 
+
+## Firebase
+### Setup Firebase
+[Here](https://www.youtube.com/watch?v=xUKIQAIOfrU) is a tutorial on how to setup a firebase storage instance. You can find the firebaseConfig in Search.js and edit it accordingly.
+
+### Download from Firebase
+To download the whole storage bucket you can use [gsutil](https://cloud.google.com/storage/docs/gsutil/commands/cp)
+```
+gsutil -m cp -R gs://<bucket_name>
+```
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -39,32 +126,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
