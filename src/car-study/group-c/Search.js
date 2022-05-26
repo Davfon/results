@@ -100,7 +100,7 @@ function Search() {
       <div className='App-header'>
         <img className='logo' src={Logo} alt='' />
         <div className='searchbar'>
-          <input className='fake-input-field' id='inputField' value={localStorage.getItem('searchTerm')} readOnly />
+          <input className='fake-input-field' id='input1' value={localStorage.getItem('searchTerm')} readOnly />
         </div>
         <div className='done-container'>
           <Button onClick={() => setIsModalOpen(!isModalOpen)}>Done</Button>
