@@ -43,6 +43,11 @@ function Search() {
   initializeApp(firebaseConfig);
 
   const exitPageNotification = function(e) {
+    const doneHighlighter = document.getElementById('done-highlighter');
+    doneHighlighter.classList.remove('done-highlighter-animation');
+    void doneHighlighter.offsetWidth;
+    doneHighlighter.classList.add('done-highlighter-animation');
+
     const str = window.location.href.split("").reverse().join("");
     const subpage = str.substring(0, str.indexOf('/')).split("").reverse().join("");
     if (formSubmitting || subpage !== 'search') {
@@ -119,6 +124,7 @@ function Search() {
           <input className='fake-input-field' id='input1' value={localStorage.getItem('searchTerm')} readOnly />
         </div>
         <div className='done-container'>
+          <div className='done-highlighter-animation' id='done-highlighter'/>
           <Button onClick={() => setIsModalOpen(!isModalOpen)}>Done</Button>
         </div>
         <div className='tabs'>

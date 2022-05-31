@@ -65,6 +65,27 @@
   color:#686868;
 }
 
+.done-highlighter-animation {
+  position: absolute;
+  left: 78.9vw;
+  margin-right: 1vw;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background-color: #fcfaae;
+  animation: fade 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .done-container button{
   position: absolute;
   top: 4vh;
