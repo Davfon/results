@@ -48,6 +48,7 @@
   align-items: center;
   height: 26px;
   width: 35vw;
+  background-color: lightgray;
   border: 0px solid lightgray;
   padding: 10px 20px;
   border-radius: 50px;
@@ -56,8 +57,12 @@
   cursor: default;
 }
 
-input:focus{
+#input1:focus{
   outline: none;
+}
+
+#input1 {
+  color:#686868;
 }
 
 .done-container button{
