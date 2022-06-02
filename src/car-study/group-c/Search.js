@@ -26,8 +26,7 @@ function Search() {
   const fourthLink = 'https://www.iamexpat.ch/expat-info/driving-switzerland/driving-licence';
   const fifthLink = 'https://www.englishforum.ch/transportation-driving/209962-us-driver-s-license-conversion-swiss.html';
   const sixthLink = 'https://www.frommers.com/destinations/switzerland/planning-a-trip/getting-around';
-  const [clickList, setClickList] = useState([]);
-  const [timeRecords, setTimeRecords] = useState([0,0,0,0,0,0,0]);
+  const [actions, setActions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
 
@@ -58,7 +57,7 @@ function Search() {
     return 'Please press the "Done" button, before exiting the page.';
   };
 
-  window.addEventListener("beforeunload", exitPageNotification);
+  window.addEventListener('beforeunload', exitPageNotification);
 
   function getCurrentTime() {
     var now = new Date();
@@ -69,7 +68,7 @@ function Search() {
 
   function endSearch() {
     setFormSubmitting(true);
-    window.removeEventListener("beforeunload", exitPageNotification);
+    window.removeEventListener('beforeunload', exitPageNotification);
     const storage = getStorage();
     const storageRef = ref(storage, 'group-c/ '+ getCurrentTime() + ' group-c.txt');
     const id = localStorage.getItem('id');
@@ -77,7 +76,7 @@ function Search() {
       'ID: ' + id +
       '\nSearch Term: ' + localStorage.getItem('searchTerm') + 
       '\nTotal Search Time in s: ' + elapsedTime + 
-      '\nClick List: ' + String(clickList);
+      '\nActions: ' + String(actions);
     var blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
     uploadBytes(storageRef, blob).then((snapshot) => {
       console.log('Uploaded a blob or file!');
@@ -87,13 +86,12 @@ function Search() {
   }
 
   function handleClick(link, id) {
-    let currentTimeRecords = [ ...timeRecords ];
-    if (currentTimeRecords[id] === 0) {
-      currentTimeRecords[id] = elapsedTime;
-      setTimeRecords(currentTimeRecords);
-    }
-    setClickList(oldList => [...oldList, String(id) + ': ' + String(elapsedTime)]);
+    setActions(oldList => [...oldList, ' ' + String(id) + ': ' + String(elapsedTime)]);
     window.open(link);
+  }
+
+  window.onfocus = function() {
+    setActions(oldList => [...oldList, ' Focus: ' + String(elapsedTime)]);
   }
 
   return (
