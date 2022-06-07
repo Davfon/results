@@ -11,7 +11,8 @@ Results is a react-based web application to conduct experiments on web search be
 The Results Web Application can track:
 - search term
 - total search time
-- clicks on search results with timestamp
+- clicks on search results (with timestamp)
+- focus on main website (with timestamp)
 
 Results saves the tracked data into text files, which are stored in [Firebase](#firebase).
 
