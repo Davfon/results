@@ -85,12 +85,12 @@ function Search() {
   }
 
   function handleClick(link, id) {
-    setActions(oldList => [...oldList, ' ' + String(id) + ': ' + String(elapsedTime)]);
+    setActions(oldList => [...oldList, String(id) + ':' + String(elapsedTime)]);
     window.open(link);
   }
 
   window.onfocus = function() {
-    setActions(oldList => [...oldList, ' Focus: ' + String(elapsedTime)]);
+    setActions(oldList => [...oldList, 'Focus:' + String(elapsedTime)]);
   }
 
   return (
