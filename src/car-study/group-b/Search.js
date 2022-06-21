@@ -69,8 +69,8 @@ function Search() {
     setFormSubmitting(true);
     window.removeEventListener('beforeunload', exitPageNotification);
     const storage = getStorage();
-    const storageRef = ref(storage, 'group-b/' + getCurrentTime() + ' group-b.txt');
     const id = localStorage.getItem('id');
+    const storageRef = ref(storage, 'group-b/' + getCurrentTime() + ' group-b ' + id + '.txt');
     const data = 
       'ID: ' + id +
       '\nSearch Term: ' + localStorage.getItem('searchTerm') + 

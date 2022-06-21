@@ -70,8 +70,8 @@ function Search() {
     setFormSubmitting(true);
     window.removeEventListener('beforeunload', exitPageNotification);
     const storage = getStorage();
-    const storageRef = ref(storage, 'group-c/ '+ getCurrentTime() + ' group-c.txt');
     const id = localStorage.getItem('id');
+    const storageRef = ref(storage, 'group-c/ '+ getCurrentTime() + ' group-c ' + id + '.txt');
     const data = 
       'ID: ' + id +
       '\nSearch Term: ' + localStorage.getItem('searchTerm') + 
