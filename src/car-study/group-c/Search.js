@@ -30,16 +30,9 @@ function Search() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDJcuwU3zC7RGNoALPWzbfefbdnJhhtCo4",
-    authDomain: "results-a9800.firebaseapp.com",
-    projectId: "results-a9800",
-    storageBucket: "results-a9800.appspot.com",
-    messagingSenderId: "704807750931",
-    appId: "1:704807750931:web:0e6bd86ad0956b38c45ee6"
-  };
-
-  initializeApp(firebaseConfig);
+  // insert firebaseConfig here
+  
+  //initializeApp(firebaseConfig);
 
   const exitPageNotification = function(e) {
     const doneHighlighter = document.getElementById('done-highlighter');
