@@ -5,7 +5,9 @@ Results is a react-based web application to conduct controlled experiments on we
 [Creating search results](#creating-search-results)<br />
 [Creating featured snippets](#creating-featured-snippets)<br />
 [Navigation](#navigation)<br />
-[Firebase](#firebase)
+[Firebase](#firebase)<br />
+[Scripts](#scripts)<br />
+[Data](#data)<br />
 
 ## Track Behavioral Data
 The Results Web Application can track:
