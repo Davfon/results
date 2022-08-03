@@ -99,6 +99,8 @@ The script to calculate statistical significance and the pearson correlation coe
 
 ## Data
 The combined data that was collected for the controlled experiment on featured snippets from the website, the survey and prolific can be found [here](https://github.com/Davfon/results/tree/master/data).<br>
+<br>
+<br>
 
 ## Getting Started with Create React App
 
