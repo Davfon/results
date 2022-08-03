@@ -1,5 +1,5 @@
 # Davfon-results
-Results is a react-based web application to conduct experiments on web search behavior.
+Results is a react-based web application to conduct controlled experiments on web search behavior.
 
 [Track Behavioral Data](#track-behavioral-data)<br />
 [Creating search results](#creating-search-results)<br />
@@ -12,7 +12,9 @@ The Results Web Application can track:
 - search term
 - total search time
 - clicks on search results (with timestamp)
-- focus on main website (with timestamp)
+- focus on main website (with timestamp) \*
+
+\* The timestamps can be used to calculate time spent on a specific search result. (There are some inconsistencies with safari)
 
 Results saves the tracked data into text files, which are stored in [Firebase](#firebase).
 
@@ -85,6 +87,16 @@ To download the whole storage bucket you can use [gsutil](https://cloud.google.c
 ```
 gsutil -m cp -R gs://<bucket_name>
 ```
+
+## Scripts
+Jupyter Notebook was used to calculate statistical significance and to do data-cleaning, data-processing and data-visualization<br>
+The script to help finding duplicate text file entries can be found [here](https://github.com/Davfon/results/tree/master/scripts/data-cleaning.ipynb).<br>
+The script used to merge text files created from the website with the csv files from the survey and demographic data can be found [here](https://github.com/Davfon/results/tree/master/scripts/data-processing.ipynb).<br>
+The script used to make data visualizations can be found [here](https://github.com/Davfon/results/tree/master/scripts/data-visualization.ipynb).<br>
+The script to calculate statistical significance and the pearson correlation coefficient can be found [here](https://github.com/Davfon/results/tree/master/scripts/significance.ipynb).<br>
+
+## Data
+The combined data that was collected for the controlled experiment on featured snippets from the website, the survey and prolific can be found [here](https://github.com/Davfon/results/tree/master/data).<br>
 
 ## Getting Started with Create React App
 
